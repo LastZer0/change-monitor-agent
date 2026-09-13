@@ -1,0 +1,20 @@
+{
+  "targets": [
+    {
+      "name": "Example Test Page",
+      "url": "https://example.com/",
+      "enabled": true,
+      "min_score": 6,
+      "keywords": [
+        "IT Support",
+        "Windows",
+        "Linux",
+        "VMware",
+        "Firewall",
+        "VPN",
+        "AI"
+      ],
+      "context": "This is only a safe starter target. Replace it with real URLs after the first successful test."
+    }
+  ]
+}
