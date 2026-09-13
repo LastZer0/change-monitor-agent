@@ -1,0 +1,48 @@
+name: Change Monitor
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 */6 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run monitor
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: ${{ vars.OPENAI_MODEL || 'gpt-5.6-luna' }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TEST_NOTIFICATION: ${{ vars.TEST_NOTIFICATION || '0' }}
+        run: python agent.py
+
+      - name: Persist snapshots
+        run: |
+          if git diff --quiet -- storage/snapshots.json; then
+            echo "No snapshot changes."
+            exit 0
+          fi
+
+          git config user.name "change-monitor-bot"
+          git config user.email "change-monitor-bot@users.noreply.github.com"
+          git add storage/snapshots.json
+          git commit -m "chore: update monitor snapshots"
+          git push
