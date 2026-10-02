@@ -1,7 +1,7 @@
 {
   "https://example.com/": {
     "name": "Example Test Page",
-    "hash": "611e9098c856329a9716d3a14b6ddb3565d3c63d3d3f5c83c7aa26c58c4b5652",
-    "text": "Example Domain\nThis domain is for use in documentation examples without needing permission. This is not a service, avoid relying on it for testing and monitoring purposes.\nLearn more"
+    "hash": "cbf3f738cc4646f250e5964ab74741b434912a67e1cce86c798bf71af1cf85c8",
+    "text": "Example Domain\nThis domain is for use in documentation examples without needing permission. This is not a service; avoid relying on it for testing and monitoring purposes."
   }
 }
